@@ -62,7 +62,6 @@ def basic_auth(auth_request):
 
     if username == password:
         context = {'is_admin': True}
-        # return AuthResponse(routes=['/*'], principal_id=username)
         return AuthResponse(routes=[AuthRoute('/*', ["GET", "POST"])], principal_id=username, context=context)
     return AuthResponse(routes=[], principal_id=None)
 
@@ -209,16 +208,6 @@ def transcoder_video(input_file):
 
     # Output job ID and exit. Do not wait for the job to finish.
     print(f'Created Amazon Elastic Transcoder job {job_info["Id"]}')
-
-
-# @app.on_sns_message(topic=os.environ['VIDEO_TOPIC_NAME'])
-# def add_video_file(event):
-#    message = json.loads(event.message)
-#    labels = get_rekognition_client().get_video_job_labels(message['JobId'])
-#    get_media_db().add_media_file(
-#        name=message['Video']['S3ObjectName'],
-#        media_type=db.VIDEO_TYPE,
-#        labels=labels)
 
 
 def _is_video(key):

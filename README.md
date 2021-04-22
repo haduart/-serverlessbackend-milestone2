@@ -7,7 +7,19 @@ the video into a lower bitrate. We will also add DynamoDB to store the informati
 the name of the video, and the bucket and folder where it is located.
 Because we like writing clean code we will introduce testing to secure and validate the project implementation, 
 including unit and integration tests.  
-  
+
+**Considerations before starting**
+
+Before starting this project consider veryfying that all necessary servies are available in your region. 
+![Alt text](docs/images/regions.png?raw=true "All regions in AWS")
+One way of knowing if those services are available is checking the FAQ:
+* [ElasticTranscoder FAQ](https://aws.amazon.com/en/elastictranscoder/faqs/)
+You can also refer to the [AWS Global Infraestructure Regional Table](https://aws.amazon.com/en/about-aws/global-infrastructure/regional-product-services/)  
+
+The services that your region has to support are and that are more infrequent or experimental are:
+* AWS Elastic Transcoder
+* Amazon Comprehend
+* AWS Transcribe  
 
 **Workflow**
 
@@ -376,6 +388,18 @@ Finally, we've start setting up PyTest tooling to be able to test our project us
 * Hands-on experience with Amazon Elastic Transcoder pipelines, jobs, and presets, and how they can be automated using AWS Lambda functions.
 * Hands-on experience with DynamoDB, query, insert, and update with Python and Botocore Library.
 * Experience testing with both Unit and Integration tests. 
+
+**Clean up**
+To delete the Chalice project just run the delecte command form the Chalice CLI.
+```commandline
+ $ chalice delete
+```
+This command will remove AWS Gateways and AWS Lambdas that have been created due to Chalice.
+To delete the cloudformation stack use the following command from the AWS CLI:
+```commandline
+$ aws cloudformation delete-stack --stack-name dynamodb-oico
+```
+A part from all of this, if you've created any other AWS resource manually you have to also manually remove it (S3, Transcode, Transcribe, Comprehend) 
 
 
 **Resources**
